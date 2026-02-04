@@ -14,17 +14,6 @@ const experience = [
       'Collaborated on research projects',
     ],
   },
-  {
-    role: 'Blockchain Student',
-    company: 'Presidency University',
-    period: '2022 - Present',
-    description: 'Specializing in Blockchain Technology within Computer Science Engineering program. Building decentralized applications and smart contracts.',
-    highlights: [
-      'Developed decentralized e-voting system',
-      'Studied smart contract security',
-      'Participated in blockchain hackathons',
-    ],
-  },
 ];
 
 export default function Experience() {

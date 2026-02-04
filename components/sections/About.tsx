@@ -48,7 +48,7 @@ export default function About() {
                 </h3>
                 <p className="text-lg font-medium">B.Tech in Computer Science & Engineering</p>
                 <p className="text-base text-primary-secondary">Blockchain Technology</p>
-                <p className="text-sm text-primary-secondary mt-1">Presidency University • 2022 - Present</p>
+                <p className="text-sm text-primary-secondary mt-1">Presidency University • 2023 - Present</p>
               </div>
               
               <div>
