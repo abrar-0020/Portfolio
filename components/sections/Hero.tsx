@@ -1,8 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Scene3D from '@/components/3d/Scene3D';
+import dynamic from 'next/dynamic';
 import { FadeIn } from '@/components/animations/Motion';
+
+const Scene3D = dynamic(() => import('@/components/3d/Scene3D'), {
+  ssr: false,
+});
 
 export default function Hero() {
   return (
