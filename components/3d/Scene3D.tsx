@@ -37,11 +37,21 @@ function FloatingSphere({ position, scale, speed, color, isMobile }: any) {
 }
 
 function Scene({ isMobile }: { isMobile: boolean }) {
-  const spheres = useMemo(() => [
-    { position: [-3, 0, -5], scale: 1.5, speed: 0.5, color: '#dbeafe' },
-    { position: [3, -1, -4], scale: 1.2, speed: 0.7, color: '#e0e7ff' },
-    { position: [0, 2, -6], scale: 1, speed: 0.6, color: '#f0f9ff' },
-  ], []);
+  // Different sphere positions for mobile vs desktop
+  const spheres = useMemo(() => {
+    if (isMobile) {
+      return [
+        { position: [-2, 1, -3], scale: 1.2, speed: 0.5, color: '#dbeafe' },
+        { position: [2, -0.5, -3], scale: 1, speed: 0.7, color: '#e0e7ff' },
+        { position: [0, 1.5, -4], scale: 0.8, speed: 0.6, color: '#f0f9ff' },
+      ];
+    }
+    return [
+      { position: [-3, 0, -5], scale: 1.5, speed: 0.5, color: '#dbeafe' },
+      { position: [3, -1, -4], scale: 1.2, speed: 0.7, color: '#e0e7ff' },
+      { position: [0, 2, -6], scale: 1, speed: 0.6, color: '#f0f9ff' },
+    ];
+  }, [isMobile]);
 
   return (
     <>
@@ -66,7 +76,10 @@ export default function Scene3D() {
   return (
     <div className="absolute inset-0 -z-10">
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
+        camera={{ 
+          position: [0, 0, 5], 
+          fov: isMobile ? 60 : 45 
+        }}
         style={{ background: 'transparent' }}
         gl={{ 
           antialias: !isMobile,
