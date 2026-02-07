@@ -17,6 +17,7 @@ const projects = [
       'Transparent and tamper-proof results',
       'Privacy-preserving voter authentication',
     ],
+    githubUrl: 'https://github.com/abrar-0020/Decentralized-E-Voting-System',
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ const projects = [
       'Batch file verification',
       'Detailed hash comparison reports',
     ],
+    githubUrl: 'https://github.com/abrar-0020/Integri-Checker',
   },
   {
     id: 3,
@@ -43,6 +45,7 @@ const projects = [
       'Context-aware conversations',
       'Real-time response generation',
     ],
+    githubUrl: 'https://github.com/abrar-0020/AI-Chat-Application',
   },
   {
     id: 4,
@@ -56,6 +59,7 @@ const projects = [
       'Multiple framework support',
       'Responsive code generation',
     ],
+    githubUrl: 'https://github.com/abrar-0020/Code-Canva-AI',
   },
   {
     id: 5,
@@ -69,6 +73,7 @@ const projects = [
       'Natural language processing',
       'Offline functionality',
     ],
+    githubUrl: 'https://github.com/abrar-0020/Voice-Calculator',
   },
   {
     id: 6,
@@ -82,6 +87,7 @@ const projects = [
       'Local SQL database for data storage',
       'Real-time expense analysis and insights',
     ],
+    githubUrl: 'https://github.com/abrar-0020/Expense_Tracker',
   },
 ];
 
@@ -195,10 +201,15 @@ export default function Projects() {
                   </div>
                   
                   <button
-                    onClick={() => setSelectedProject(null)}
+                    onClick={() => {
+                      const project = projects.find((p) => p.id === selectedProject);
+                      if (project?.githubUrl) {
+                        window.open(project.githubUrl, '_blank');
+                      }
+                    }}
                     className="w-full py-3 bg-primary-text text-primary-bg rounded-full font-medium hover:bg-primary-secondary transition-colors"
                   >
-                    Close
+                    Go to GitHub
                   </button>
                 </>
               )}
