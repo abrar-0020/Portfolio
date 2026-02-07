@@ -14,7 +14,7 @@ const skillCategories = [
   },
   {
     title: 'Tools & Practices',
-    skills: ['Git', 'GitHub', 'Rapid Prototyping', 'UI/UX Design', 'Agile Development'],
+    skills: ['Git', 'GitHub', 'Rapid Prototyping'],
   },
 ];
 
