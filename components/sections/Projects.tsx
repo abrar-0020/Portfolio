@@ -17,7 +17,7 @@ const projects = [
       'Transparent and tamper-proof results',
       'Privacy-preserving voter authentication',
     ],
-    githubUrl: 'https://github.com/abrar-0020/Decentralized-E-Voting-System',
+    githubUrl: 'https://github.com/abrar-0020/Decentralized-E-Voting-System-for-College',
   },
   {
     id: 2,
@@ -45,7 +45,7 @@ const projects = [
       'Context-aware conversations',
       'Real-time response generation',
     ],
-    githubUrl: 'https://github.com/abrar-0020/AI-Chat-Application',
+    githubUrl: 'https://github.com/abrar-0020/ai-chat-app',
   },
   {
     id: 4,
