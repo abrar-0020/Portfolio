@@ -24,7 +24,7 @@ const education = [
   },
   {
     degree: 'High School',
-    institution: 'Bharth English High School',
+    institution: 'Bharath English High School',
     location: 'Bangalore',
     period: 'Completed',
     score: '86%',
