@@ -4,42 +4,49 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function SoundPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
 
   useEffect(() => {
-    const playSound = () => {
-      if (audioRef.current && !hasInteracted) {
-        audioRef.current.volume = 0.3; // Set volume to 30%
-        audioRef.current.play().catch((error) => {
-          console.log('Autoplay prevented:', error);
-          // If autoplay fails, wait for user interaction
-        });
-        setHasInteracted(true);
+    const playSound = async () => {
+      if (audioRef.current && !hasPlayed) {
+        try {
+          audioRef.current.volume = 0.3; // Set volume to 30%
+          audioRef.current.currentTime = 0; // Reset to start
+          await audioRef.current.play();
+          setHasPlayed(true);
+        } catch (error) {
+          console.log('Autoplay prevented, waiting for user interaction');
+        }
       }
     };
 
-    // Try to play immediately
-    playSound();
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      playSound();
+    }, 100);
 
     // Fallback: play on first user interaction if autoplay was blocked
     const handleInteraction = () => {
-      playSound();
-      // Remove listeners after first interaction
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
+      if (!hasPlayed && audioRef.current) {
+        audioRef.current.volume = 0.3;
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().then(() => {
+          setHasPlayed(true);
+        }).catch(() => {});
+      }
     };
 
-    document.addEventListener('click', handleInteraction);
-    document.addEventListener('keydown', handleInteraction);
-    document.addEventListener('touchstart', handleInteraction);
+    document.addEventListener('click', handleInteraction, { once: true });
+    document.addEventListener('keydown', handleInteraction, { once: true });
+    document.addEventListener('touchstart', handleInteraction, { once: true });
 
     return () => {
+      clearTimeout(timer);
       document.removeEventListener('click', handleInteraction);
       document.removeEventListener('keydown', handleInteraction);
       document.removeEventListener('touchstart', handleInteraction);
     };
-  }, [hasInteracted]);
+  }, [hasPlayed]);
 
   return (
     <audio
