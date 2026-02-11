@@ -73,26 +73,9 @@ export default function Contact() {
                 ✓ Available for Freelance Projects
               </div>
               
-              <motion.h3 
-                className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-6"
-                animate={{
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{
-                  duration: 5,
-                  ease: 'easeInOut',
-                  repeat: Infinity,
-                }}
-                style={{
-                  background: 'linear-gradient(90deg, #ffffff, #60a5fa, #a78bfa, #ffffff)',
-                  backgroundSize: '200% 200%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
+              <h3 className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-6">
                 Ready to Build Something Amazing?
-              </motion.h3>
+              </h3>
               
               <p className="text-lg text-primary-secondary mb-8">
                 Let's collaborate on your next AI-powered or blockchain-enabled project
