@@ -69,8 +69,8 @@ export default function Contact() {
         <FadeIn delay={0.3}>
           <div className="backdrop-blur-sm bg-white/5 rounded-3xl p-12 md:p-16 text-center border border-white/10 shadow-xl">
             <div className="max-w-2xl mx-auto">
-              <div className="inline-block px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm font-medium mb-6">
-                ✓ Available for Freelance Projects
+              <div className="inline-block px-4 py-2 bg-primary-accent/20 text-primary-accent rounded-full text-sm font-medium mb-6 border border-primary-accent/30">
+                ● Available for Freelance Projects
               </div>
               
               <h3 className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-6">
