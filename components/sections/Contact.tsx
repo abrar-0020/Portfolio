@@ -67,60 +67,33 @@ export default function Contact() {
         </div>
         
         <FadeIn delay={0.3}>
-          <div className="bg-primary-soft rounded-3xl p-8 md:p-12">
-            <h3 className="text-2xl font-display font-semibold mb-6 text-center">
-              Or send me a message
-            </h3>
-            
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-primary-text mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-primary-border bg-primary-bg focus:border-primary-accent focus:outline-none transition-colors"
-                  placeholder="Your name"
-                />
+          <div className="bg-gradient-to-br from-primary-accent/10 to-primary-text/5 rounded-3xl p-12 md:p-16 text-center border-2 border-primary-accent/20">
+            <div className="max-w-2xl mx-auto">
+              <div className="inline-block px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm font-medium mb-6">
+                ✓ Available for Freelance Projects
               </div>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-primary-text mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-primary-border bg-primary-bg focus:border-primary-accent focus:outline-none transition-colors"
-                  placeholder="your@email.com"
-                />
-              </div>
+              <h3 className="text-3xl md:text-4xl font-display font-bold text-primary-text mb-6">
+                Ready to Build Something Amazing?
+              </h3>
               
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-primary-text mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-primary-border bg-primary-bg focus:border-primary-accent focus:outline-none transition-colors resize-none"
-                  placeholder="Your message..."
-                />
-              </div>
+              <p className="text-lg text-primary-secondary mb-8">
+                Let's collaborate on your next AI-powered or blockchain-enabled project
+              </p>
               
-              <motion.button
-                type="submit"
-                className="w-full py-4 bg-primary-text text-primary-bg rounded-full font-medium hover:bg-primary-secondary transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <motion.a
+                href="/resume.pdf"
+                download
+                className="inline-flex items-center gap-3 px-8 py-4 bg-primary-text text-primary-bg rounded-full font-semibold text-lg hover:bg-primary-secondary transition-colors shadow-lg hover:shadow-xl"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Send Message
-              </motion.button>
-            </form>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Resume
+              </motion.a>
+            </div>
           </div>
         </FadeIn>
         
