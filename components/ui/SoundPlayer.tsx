@@ -5,58 +5,84 @@ import { useEffect, useRef, useState } from 'react';
 export default function SoundPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(false);
+  const interactionAttempted = useRef(false);
 
   useEffect(() => {
     const playSound = async () => {
       if (audioRef.current && !hasPlayed) {
         try {
-          audioRef.current.volume = 0.01; // Set volume to 1%
+          audioRef.current.volume = 0.10; // Set volume to 1%
           audioRef.current.currentTime = 0; // Reset to start
           await audioRef.current.play();
           setHasPlayed(true);
+          setShowPrompt(false);
         } catch (error) {
           console.log('Autoplay prevented, waiting for user interaction');
+          // Show prompt after a delay if autoplay failed
+          setTimeout(() => {
+            if (!hasPlayed) {
+              setShowPrompt(true);
+            }
+          }, 1000);
         }
       }
     };
 
-    // Small delay to ensure DOM is ready
+    // Try autoplay with a small delay
     const timer = setTimeout(() => {
       playSound();
     }, 100);
 
     // Fallback: play on first user interaction if autoplay was blocked
-    const handleInteraction = () => {
-      if (!hasPlayed && audioRef.current) {
-        audioRef.current.volume = 0.01;
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().then(() => {
+    const handleInteraction = async () => {
+      if (!hasPlayed && audioRef.current && !interactionAttempted.current) {
+        interactionAttempted.current = true;
+        try {
+          audioRef.current.volume = 0.01;
+          audioRef.current.currentTime = 0;
+          await audioRef.current.play();
           setHasPlayed(true);
-        }).catch(() => {});
+          setShowPrompt(false);
+        } catch (error) {
+          console.log('Failed to play audio on interaction');
+        }
       }
     };
 
-    document.addEventListener('click', handleInteraction, { once: true });
-    document.addEventListener('keydown', handleInteraction, { once: true });
-    document.addEventListener('touchstart', handleInteraction, { once: true });
+    // Add multiple event listeners for better mobile support
+    const events = ['click', 'touchstart', 'touchend', 'keydown', 'scroll'];
+    events.forEach(event => {
+      document.addEventListener(event, handleInteraction, { passive: true });
+    });
 
     return () => {
       clearTimeout(timer);
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
+      events.forEach(event => {
+        document.removeEventListener(event, handleInteraction);
+      });
     };
   }, [hasPlayed]);
 
   return (
-    <audio
-      ref={audioRef}
-      preload="auto"
-      className="hidden"
-    >
-      <source src="/sounds/welcome.mp3" type="audio/mpeg" />
-      <source src="/sounds/welcome.ogg" type="audio/ogg" />
-      Your browser does not support the audio element.
-    </audio>
+    <>
+      {showPrompt && (
+        <div 
+          className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-6 py-3 rounded-full text-sm backdrop-blur-sm z-50 animate-pulse"
+          onClick={() => setShowPrompt(false)}
+        >
+          🔊 Tap anywhere to enable sound
+        </div>
+      )}
+      <audio
+        ref={audioRef}
+        preload="auto"
+        className="hidden"
+      >
+        <source src="/sounds/welcome.mp3" type="audio/mpeg" />
+        <source src="/sounds/welcome.ogg" type="audio/ogg" />
+        Your browser does not support the audio element.
+      </audio>
+    </>
   );
 }
