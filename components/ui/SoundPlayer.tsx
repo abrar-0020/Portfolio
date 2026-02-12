@@ -12,7 +12,7 @@ export default function SoundPlayer() {
     const playSound = async () => {
       if (audioRef.current && !hasPlayed) {
         try {
-          audioRef.current.volume = 0.10; // Set volume to 1%
+          audioRef.current.volume = 0.15; // Set volume to 15%
           audioRef.current.currentTime = 0; // Reset to start
           await audioRef.current.play();
           setHasPlayed(true);
@@ -39,7 +39,7 @@ export default function SoundPlayer() {
       if (!hasPlayed && audioRef.current && !interactionAttempted.current) {
         interactionAttempted.current = true;
         try {
-          audioRef.current.volume = 0.01;
+          audioRef.current.volume = 0.15;
           audioRef.current.currentTime = 0;
           await audioRef.current.play();
           setHasPlayed(true);
